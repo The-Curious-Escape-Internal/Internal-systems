@@ -34,6 +34,7 @@
       text-align: center;
       position: relative;
       animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.3s ease-in-out;
     }
 
     @keyframes fadeIn {
@@ -41,7 +42,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Connected Logos Header */
+    /* Connected Aligned Logos Header */
     .connection-header {
       display: flex;
       justify-content: center;
@@ -61,6 +62,12 @@
       justify-content: center;
       align-items: center;
       z-index: 2;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .logo-circle:hover {
+      border-color: #5865f2;
+      transform: scale(1.05);
     }
 
     .logo {
@@ -84,7 +91,18 @@
       filter: invert(37%) sepia(80%) saturate(2283%) hue-rotate(222deg) brightness(98%) contrast(96%);
     }
 
-    /* Content Area */
+    /* Content Area with smooth fade-out */
+    .content {
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .content.fade-out {
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+    }
+
     .content p {
       font-size: 1.05rem;
       line-height: 1.4;
@@ -101,6 +119,7 @@
       text-align: left;
       margin-bottom: 24px;
       border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: border-color 0.3s ease;
     }
 
     .permissions-box h4 {
@@ -142,25 +161,39 @@
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.2s ease, transform 0.1s ease;
+      transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
     }
 
     .agree-btn:hover {
       background-color: #4752c4;
+      box-shadow: 0 4px 12px rgba(88, 101, 242, 0.35);
     }
 
     .agree-btn:active {
       transform: scale(0.98);
     }
 
-    /* Loading Spinner State */
+    /* Loading Spinner State with smooth fade-in */
     .spinner-container {
-      display: none;
+      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 16px;
       min-height: 180px;
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -30%);
+      transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out, visibility 0.4s;
+    }
+
+    .spinner-container.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -40%);
     }
 
     .spinner {
@@ -176,6 +209,7 @@
       font-size: 0.9rem;
       color: #949ba4;
       font-weight: 500;
+      white-space: nowrap;
     }
 
     @keyframes spin {
@@ -208,7 +242,7 @@
 
     <!-- Main Content -->
     <div id="cardContent" class="content">
-      <p>I agree to link Discord to <strong>The Curious Escape</strong> messaging portal.</p>
+      <p>Authorize linking Discord to <strong>The Curious Escape</strong> messaging portal.</p>
 
       <!-- Access Granted Details -->
       <div class="permissions-box">
@@ -221,7 +255,7 @@
         </ul>
       </div>
 
-      <button class="agree-btn" onclick="processAgreement()">I Agree</button>
+      <button class="agree-btn" onclick="processAgreement()">Authorize</button>
     </div>
 
     <!-- Loading Spinner Area -->
@@ -233,11 +267,17 @@
 
   <script>
     function processAgreement() {
-      // Hide content area
-      document.getElementById('cardContent').style.display = 'none';
-      
-      // Show loading spinner
-      document.getElementById('spinnerContainer').style.display = 'flex';
+      const content = document.getElementById('cardContent');
+      const spinner = document.getElementById('spinnerContainer');
+
+      // Smoothly fade out content
+      content.classList.add('fade-out');
+
+      // Wait for fade-out to finish before showing spinner
+      setTimeout(() => {
+        content.style.display = 'none';
+        spinner.classList.add('active');
+      }, 300);
 
       // Store tokens for App Inventor capture
       if (window.location.hash) {
