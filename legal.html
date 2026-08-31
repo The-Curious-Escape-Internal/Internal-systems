@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terms of Service & Privacy Policy - The Curious Escape</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBRUEGt8pKqdewEd5V3ekqQHgE02BGig6K10OMnnCXow&s=10') no-repeat center center fixed;
+      background-size: cover;
+      color: #ffffff;
+      padding: 20px 0;
+    }
+
+    .card {
+      background: rgba(22, 23, 26, 0.94);
+      backdrop-filter: blur(12px);
+      width: 90%;
+      max-width: 520px;
+      border-radius: 18px;
+      padding: 32px 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      position: relative;
+      animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Header Navigation Tabs */
+    .tab-header {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 12px;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: #949ba4;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tab-btn.active {
+      color: #ffffff;
+      background: #5865f2;
+    }
+
+    /* Content Area */
+    .policy-content {
+      display: none;
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 8px;
+      text-align: left;
+    }
+
+    .policy-content.active {
+      display: block;
+    }
+
+    /* Custom Scrollbar */
+    .policy-content::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .policy-content::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 0.95rem;
+      color: #5865f2;
+      margin-top: 16px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    p, li {
+      font-size: 0.88rem;
+      color: #dbdee1;
+      line-height: 1.5;
+    }
+
+    ul {
+      margin-left: 18px;
+      margin-bottom: 12px;
+    }
+
+    /* Back Button */
+    .back-container {
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    .back-btn {
+      display: inline-block;
+      text-decoration: none;
+      color: #949ba4;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .back-btn:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <!-- Navigation Tabs -->
+    <div class="tab-header">
+      <button id="btn-tos" class="tab-btn active" onclick="switchTab('tos')">Terms of Service</button>
+      <button id="btn-privacy" class="tab-btn" onclick="switchTab('privacy')">Privacy Policy</button>
+    </div>
+
+    <!-- Terms of Service Content -->
+    <div id="tos" class="policy-content active">
+      <h2>Terms of Service</h2>
+      <p>Last updated: August 2026</p>
+
+      <h3>1. Acceptance of Terms</h3>
+      <p>By authenticating and linking your account to <strong>The Curious Escape Messaging Portal</strong>, you agree to comply with and be bound by these Terms of Service.</p>
+
+      <h3>2. Description of Service</h3>
+      <p>The Curious Escape Messaging Portal provides a bridged chat connection allowing authorized staff and users to read and send Discord messages via our custom application interface.</p>
+
+      <h3>3. User Conduct</h3>
+      <p>You agree not to use the service to:</p>
+      <ul>
+        <li>Violate Discord’s official Terms of Service or Community Guidelines.</li>
+        <li>Automate abusive behavior, spam, or unauthorized data scraping.</li>
+        <li>Attempt to bypass access controls or security features.</li>
+      </ul>
+
+      <h3>4. Termination</h3>
+      <p>Access to the messaging portal may be revoked at any time without prior notice if you violate these terms or misuse the authorization tokens.</p>
+    </div>
+
+    <!-- Privacy Policy Content -->
+    <div id="privacy" class="policy-content">
+      <h2>Privacy Policy</h2>
+      <p>Last updated: August 2026</p>
+
+      <h3>1. Information We Collect</h3>
+      <p>When you authorize access through Discord OAuth2, we retrieve limited account metadata required for app functionality:</p>
+      <ul>
+        <li>Discord Username and Profile Discriminator</li>
+        <li>Discord User ID</li>
+        <li>Avatar Hash (used strictly for displaying profile pictures)</li>
+        <li>Channel message data necessary for chat rendering</li>
+      </ul>
+
+      <h3>2. How Data is Used</h3>
+      <p>Collected data is used solely to render your chat session inside the app interface. We do not sell, store on third-party servers, or share your personal profile data.</p>
+
+      <h3>3. Data Storage & Security</h3>
+      <p>Authentication tokens are stored locally on your device session and are used exclusively to authenticate API requests directly with Discord.</p>
+
+      <h3>4. Revoking Access</h3>
+      <p>You can revoke access at any time through your Discord account settings under <strong>Authorized Apps</strong>.</p>
+    </div>
+
+    <!-- Footer Back Link -->
+    <div class="back-container">
+      <a href="index.html" class="back-btn">← Back to Portal</a>
+    </div>
+  </div>
+
+  <script>
+    function switchTab(tabId) {
+      // Deactivate all buttons and content
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.policy-content').forEach(content => content.classList.remove('active'));
+
+      // Activate selected tab and content
+      const targetBtn = document.getElementById('btn-' + tabId);
+      const targetContent = document.getElementById(tabId);
+
+      if (targetBtn && targetContent) {
+        targetBtn.classList.add('active');
+        targetContent.classList.add('active');
+        // Update URL hash without scrolling
+        history.replaceState(null, "", "#" + tabId);
+      }
+    }
+
+    // Read URL hash on initial page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.substring(1);
+      if (hash === 'privacy' || hash === 'tos') {
+        switchTab(hash);
+      }
+    });
+  </script>
+</body>
+</html>
