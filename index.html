@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Curious Escape Messaging Portal</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBRUEGt8pKqdewEd5V3ekqQHgE02BGig6K10OMnnCXow&s=10') no-repeat center center fixed;
+      background-size: cover;
+      color: #ffffff;
+    }
+
+    .card {
+      background: rgba(22, 23, 26, 0.94);
+      backdrop-filter: blur(12px);
+      width: 90%;
+      max-width: 420px;
+      border-radius: 18px;
+      padding: 36px 28px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      position: relative;
+      animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Top Logos Header */
+    .logo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+      width: 100%;
+    }
+
+    .logo {
+      height: 38px;
+      width: auto;
+    }
+
+    /* Tint Google Messages Logo to Discord Blurple (#5865F2) */
+    .blurple-tint {
+      filter: invert(37%) sepia(80%) saturate(2283%) hue-rotate(222deg) brightness(98%) contrast(96%);
+    }
+
+    /* Card Content */
+    .content p {
+      font-size: 1.05rem;
+      line-height: 1.5;
+      color: #dbdee1;
+      margin-bottom: 28px;
+      font-weight: 500;
+    }
+
+    .agree-btn {
+      width: 100%;
+      padding: 14px;
+      background-color: #5865f2;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .agree-btn:hover {
+      background-color: #4752c4;
+    }
+
+    .agree-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Loading Spinner State */
+    .spinner-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      min-height: 140px;
+    }
+
+    .spinner {
+      width: 46px;
+      height: 46px;
+      border: 4px solid rgba(255, 255, 255, 0.12);
+      border-top-color: #5865f2;
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+
+    .spinner-subtext {
+      font-size: 0.9rem;
+      color: #949ba4;
+      font-weight: 500;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <!-- Header Logos (Always Visible) -->
+    <div class="logo-header">
+      <!-- Discord Logo (Upper Left) -->
+      <svg class="logo" viewBox="0 0 127.14 96.36" fill="#5865F2">
+        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-18.91-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.91,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.91,96.12,53,91.08,65.69,84.69,65.69Z"/>
+      </svg>
+      
+      <!-- Google Messages Logo (Upper Right - Blurple Tint) -->
+      <img class="logo blurple-tint" src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Messages_logo_%282022%29.svg" alt="Google Messages" />
+    </div>
+
+    <!-- Main Content -->
+    <div id="cardContent" class="content">
+      <p>I agree to link Discord to <strong>The Curious Escape</strong> messaging portal.</p>
+      <button class="agree-btn" onclick="processAgreement()">I Agree</button>
+    </div>
+
+    <!-- Loading Spinner Area -->
+    <div id="spinnerContainer" class="spinner-container">
+      <div class="spinner"></div>
+      <div class="spinner-subtext">Linking your Discord account...</div>
+    </div>
+  </div>
+
+  <script>
+    function processAgreement() {
+      // Hide text and button
+      document.getElementById('cardContent').style.display = 'none';
+      
+      // Display spinner
+      document.getElementById('spinnerContainer').style.display = 'flex';
+
+      // Pass auth state to title for App Inventor WebViewer extraction
+      if (window.location.hash) {
+        document.title = "AUTH_DATA:" + window.location.hash;
+      } else {
+        document.title = "AUTH_DATA:COMPLETE";
+      }
+    }
+  </script>
+</body>
+</html>
