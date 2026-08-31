@@ -249,7 +249,7 @@
         <h4>This gives access to:</h4>
         <ul class="permissions-list">
           <li>Your Discord username & avatar</li>
-          <li>Your User ID</li>
+          <li>Your User ID & email</li>
           <li>Access to send & read messages</li>
           <li>Channel message history</li>
         </ul>
@@ -266,6 +266,16 @@
   </div>
 
   <script>
+    let savedHash = "";
+
+    // Store token hash on page load and clear URL bar to wait for authorization tap
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.location.hash && window.location.hash.includes('access_token')) {
+        savedHash = window.location.hash;
+        history.replaceState(null, "", window.location.pathname);
+      }
+    });
+
     function processAgreement() {
       const content = document.getElementById('cardContent');
       const spinner = document.getElementById('spinnerContainer');
@@ -273,18 +283,15 @@
       // Smoothly fade out content
       content.classList.add('fade-out');
 
-      // Wait for fade-out to finish before showing spinner
+      // Wait for fade-out transition to complete before showing spinner
       setTimeout(() => {
         content.style.display = 'none';
         spinner.classList.add('active');
       }, 300);
 
-      // Store tokens for App Inventor capture
-      if (window.location.hash) {
-        document.title = "AUTH_DATA:" + window.location.hash;
-        history.replaceState(null, "", window.location.pathname);
-      } else {
-        document.title = "AUTH_DATA:COMPLETE";
+      // Re-attach token fragment to trigger WebViewer1.PageLoaded in App Inventor
+      if (savedHash) {
+        window.location.hash = savedHash;
       }
     }
   </script>
